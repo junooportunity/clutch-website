@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Aunt Mae's Complete Car Care Guide | Clutch</title>
+    <meta name="description" content="Everything your mechanic hopes you never learn. 39 pages of practical car care knowledge to help you save money and never feel confused at the shop again."/>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png"/>
+    <link rel="canonical" href="https://clutchcarcareapp.com/guide/"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link {
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #9C6B7D;
+        }
+        .footer-link {
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: #9C6B7D;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #9C6B7D;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            font-weight: 500;
+            border-radius: 0.5rem;
+        }
+        .mobile-menu a:hover {
+            background-color: #F8F4F5;
+            color: #9C6B7D;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #374151;
+            transition: all 0.3s;
+        }
+        @media (max-width: 767px) {
+            .hamburger {
+                display: flex;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .book-shadow {
+            box-shadow: 0 25px 50px -12px rgba(156, 107, 125, 0.35);
+        }
+        /* Journey carousel */
+        .journey-card {
+            display: none;
+        }
+        .journey-card.active {
+            display: grid;
+        }
+        .journey-dot.active {
+            background: #9C6B7D;
+            width: 24px;
+            border-radius: 4px;
+        }
+        /* FAQ accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+        .faq-item.open .faq-chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col" style="background-color: #F8F4F5">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b relative" style="border-color: #9C6B7D">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-6">
+                    <a class="flex items-center" href="../">
+                        <img alt="Clutch logo" width="40" height="40" class="h-10 w-10 rounded-xl border border-gray-200" src="../icon.png"/>
+                        <span class="ml-3 text-2xl font-bold text-black">Clutch</span>
+                    </a>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="../#features" class="nav-link">App Features</a>
+                        <a href="#buy" class="nav-link">Get the Guide</a>
+                        <a class="nav-link" href="../support/">Support</a>
+                    </nav>
+                    <div class="hamburger md:hidden" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <a href="../">Clutch App</a>
+                    <a href="#buy">Get the Guide</a>
+                    <a href="../privacy/">Privacy</a>
+                    <a href="../terms/">Terms</a>
+                    <a href="../support/">Support</a>
+                </div>
+            </div>
+        </header>
+        <script>
+            function toggleMenu() {
+                document.getElementById('mobileMenu').classList.toggle('active');
+            }
+        </script>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div style="background: linear-gradient(to bottom, #F8F4F5 0%, #ffffff 100%)">
+                <!-- Hero Section -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-12 md:py-20">
+                    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between">
+                        <div class="text-center md:text-left md:w-1/2 lg:w-3/5">
+                            <div class="flex items-center gap-2 px-4 py-2 rounded-full border-2 w-fit mx-auto md:mx-0 mb-6" style="border-color: #9C6B7D; background-color: #F8F4F5">
+                                <svg class="w-5 h-5" style="color: #9C6B7D" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-sm font-semibold" style="color: #9C6B7D">From the makers of Clutch App</span>
+                            </div>
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+                                Everything your mechanic<br><span class="gradient-text">hopes you never learn.</span>
+                            </h1>
+                            <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                                Aunt Mae's Complete Car Care Guide empowers you to understand your vehicle, spot dishonest mechanics, and never overpay for repairs again.
+                            </p>
+                            <div class="flex flex-col items-center md:items-start gap-4 mb-8">
+                                <div class="flex items-baseline gap-4">
+                                    <span class="text-5xl font-bold" style="color: #9C6B7D">$12</span>
+                                    <span class="text-xl text-gray-400 line-through">$29</span>
+                                    <span class="text-gray-600">Instant PDF Download</span>
+                                </div>
+                                <a href="#buy" class="transition-transform hover:scale-105">
+                                    <div class="flex h-14 px-8 text-white rounded-xl items-center justify-center font-semibold text-lg" style="background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%); box-shadow: 0 8px 30px rgba(156, 107, 125, 0.4)">
+                                        Get Instant Access
+                                    </div>
+                                </a>
+                                <p class="text-sm text-gray-500">30-day money-back guarantee. No questions asked.</p>
+                            </div>
+                        </div>
+                        <!-- Book Cover -->
+                        <div class="flex flex-col items-center md:w-1/2 lg:w-2/5 flex-shrink-0">
+                            <div class="book-shadow rounded-2xl overflow-hidden" style="max-width: 300px;">
+                                <img src="images/cover.png" alt="Aunt Mae's Complete Car Care Guide" class="w-full h-auto"/>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Problem Section -->
+                <section class="py-16 md:py-20" style="background-color: rgba(156, 107, 125, 0.05)">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+                            Sound <span class="gradient-text">familiar?</span>
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                        <path stroke-linecap="round" stroke-width="2" d="M16 16s-1.5-2-4-2-4 2-4 2"/>
+                                        <circle cx="9" cy="9" r="1" fill="white"/>
+                                        <circle cx="15" cy="9" r="1" fill="white"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Overwhelmed at the Shop</h3>
+                                <p class="text-gray-600 text-sm">You nod along as the mechanic lists repairs you don't understand, hoping you're not being taken advantage of.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                        <path stroke-linecap="round" stroke-width="2" d="M12 6v6l4 2"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Unexpected Breakdowns</h3>
+                                <p class="text-gray-600 text-sm">Warning lights appear and you have no idea what they mean or how urgent they really are.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-width="2" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Overpaying for Repairs</h3>
+                                <p class="text-gray-600 text-sm">You suspect you're paying too much but have no way to know what's fair.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Journey Section -->
+                <section class="py-16 md:py-20">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <p class="text-sm font-semibold tracking-wider uppercase mb-2" style="color: #9C6B7D">Your Learning Journey</p>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                                5 Parts to Complete <span class="gradient-text">Car Confidence</span>
+                            </h2>
+                            <p class="text-lg text-gray-600 max-w-2xl mx-auto">39 pages of practical knowledge, written like a conversation with a trusted friend.</p>
+                        </div>
+
+                        <div class="journey-carousel max-w-4xl mx-auto">
+                            <div class="journey-card active grid md:grid-cols-2 gap-8 bg-white rounded-3xl p-8 border-2" data-part="1" style="border-color: #9C6B7D">
+                                <div class="flex items-center justify-center p-4 rounded-2xl" style="background-color: rgba(156, 107, 125, 0.1)">
+                                    <img src="images/part1-know-you-car.png" alt="Know Your Car" class="max-h-64 rounded-xl"/>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full w-fit mb-4" style="color: #9C6B7D; background-color: rgba(156, 107, 125, 0.15)">Part 1</span>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Know Your Car</h3>
+                                    <p class="text-gray-600 mb-4">Understand what's under the hood without becoming a mechanic. Learn to decode dashboard warnings and speak the language of car care.</p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Dashboard Light Decoder</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>The 7 Fluids That Keep You Moving</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Sounds Your Car Makes</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="journey-card grid md:grid-cols-2 gap-8 bg-white rounded-3xl p-8 border-2" data-part="2" style="border-color: #9C6B7D">
+                                <div class="flex items-center justify-center p-4 rounded-2xl" style="background-color: rgba(156, 107, 125, 0.1)">
+                                    <img src="images/part2-maintenance.png" alt="Maintenance Made Simple" class="max-h-64 rounded-xl"/>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full w-fit mb-4" style="color: #9C6B7D; background-color: rgba(156, 107, 125, 0.15)">Part 2</span>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Maintenance Made Simple</h3>
+                                    <p class="text-gray-600 mb-4">The essential maintenance tasks that save thousands over your car's lifetime, explained so anyone can follow along.</p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Oil Changes Demystified</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Tire Care for Every Season</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>The 15-Minute Monthly Checkup</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="journey-card grid md:grid-cols-2 gap-8 bg-white rounded-3xl p-8 border-2" data-part="3" style="border-color: #9C6B7D">
+                                <div class="flex items-center justify-center p-4 rounded-2xl" style="background-color: rgba(156, 107, 125, 0.1)">
+                                    <img src="images/part3-mechanics.png" alt="Dealing with Mechanics" class="max-h-64 rounded-xl"/>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full w-fit mb-4" style="color: #9C6B7D; background-color: rgba(156, 107, 125, 0.15)">Part 3</span>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Dealing with Mechanics</h3>
+                                    <p class="text-gray-600 mb-4">Find honest mechanics, spot red flags, and negotiate with confidence. Never feel taken advantage of again.</p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Finding an Honest Mechanic</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Red Flags to Watch For</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>How to Negotiate Repair Costs</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="journey-card grid md:grid-cols-2 gap-8 bg-white rounded-3xl p-8 border-2" data-part="4" style="border-color: #9C6B7D">
+                                <div class="flex items-center justify-center p-4 rounded-2xl" style="background-color: rgba(156, 107, 125, 0.1)">
+                                    <img src="images/part4-emergencies.png" alt="When Things Go Wrong" class="max-h-64 rounded-xl"/>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full w-fit mb-4" style="color: #9C6B7D; background-color: rgba(156, 107, 125, 0.15)">Part 4</span>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">When Things Go Wrong</h3>
+                                    <p class="text-gray-600 mb-4">Stay calm and handle roadside emergencies like a pro. Know exactly what to do when the unexpected happens.</p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Roadside Emergency Kit Essentials</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Flat Tire? No Problem</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Dead Battery Quick Fix</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="journey-card grid md:grid-cols-2 gap-8 bg-white rounded-3xl p-8 border-2" data-part="5" style="border-color: #9C6B7D">
+                                <div class="flex items-center justify-center p-4 rounded-2xl" style="background-color: rgba(156, 107, 125, 0.1)">
+                                    <img src="images/part5-buying.png" alt="Buying Smart" class="max-h-64 rounded-xl"/>
+                                </div>
+                                <div class="flex flex-col justify-center">
+                                    <span class="inline-block text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full w-fit mb-4" style="color: #9C6B7D; background-color: rgba(156, 107, 125, 0.15)">Part 5</span>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Buying Smart</h3>
+                                    <p class="text-gray-600 mb-4">Whether buying new or used, learn to spot deals, avoid lemons, and negotiate like a seasoned buyer.</p>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>New vs. Used: The Real Math</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Used Car Inspection Checklist</li>
+                                        <li class="flex items-center gap-2 text-gray-600"><span class="w-2 h-2 rounded-full" style="background: #9C6B7D"></span>Negotiation Scripts That Work</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-2 justify-center mt-8" id="journeyDots">
+                            <button class="journey-dot active w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all duration-300" data-part="1"></button>
+                            <button class="journey-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all duration-300" data-part="2"></button>
+                            <button class="journey-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all duration-300" data-part="3"></button>
+                            <button class="journey-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all duration-300" data-part="4"></button>
+                            <button class="journey-dot w-2 h-2 rounded-full bg-gray-300 cursor-pointer transition-all duration-300" data-part="5"></button>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    const journeyCards = document.querySelectorAll('.journey-card');
+                    const journeyDots = document.querySelectorAll('.journey-dot');
+
+                    journeyDots.forEach(dot => {
+                        dot.addEventListener('click', () => {
+                            const part = dot.dataset.part;
+
+                            journeyCards.forEach(card => {
+                                card.classList.remove('active');
+                                if (card.dataset.part === part) {
+                                    card.classList.add('active');
+                                }
+                            });
+
+                            journeyDots.forEach(d => d.classList.remove('active'));
+                            dot.classList.add('active');
+                        });
+                    });
+                </script>
+
+                <!-- Features Section -->
+                <section class="py-16 md:py-20" style="background-color: rgba(156, 107, 125, 0.05)">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <p class="text-sm font-semibold tracking-wider uppercase mb-2" style="color: #9C6B7D">What's Inside</p>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                                More than just <span class="gradient-text">a guide</span>
+                            </h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">20 Practical Chapters</h3>
+                                <p class="text-gray-600 text-sm">From dashboard lights to dealer negotiations, every chapter solves a real problem you'll face.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Written Like a Friend</h3>
+                                <p class="text-gray-600 text-sm">No jargon, no condescension. Just clear, warm explanations from Aunt Mae herself.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #9C6B7D">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Confidence Boosters</h3>
+                                <p class="text-gray-600 text-sm">Scripts, checklists, and exact phrases to use when talking to mechanics and dealers.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #B8899A">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Quick Reference Tables</h3>
+                                <p class="text-gray-600 text-sm">Maintenance schedules, warning light guides, and fair price ranges at a glance.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #B8899A">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Instant PDF Download</h3>
+                                <p class="text-gray-600 text-sm">Start reading immediately on any device. No waiting, no shipping.</p>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2 transition-all hover:shadow-xl" style="border-color: #B8899A">
+                                <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                    <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Lifetime Updates</h3>
+                                <p class="text-gray-600 text-sm">As we add new chapters and resources, you'll get them free.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials -->
+                <section class="py-16 md:py-20">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <p class="text-sm font-semibold tracking-wider uppercase mb-2" style="color: #9C6B7D">Real Results</p>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                                What readers are <span class="gradient-text">saying</span>
+                            </h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white rounded-3xl p-8 border-2" style="border-color: #9C6B7D">
+                                <div class="flex gap-1 mb-4" style="color: #9C6B7D">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"I saved $400 on my last repair just by asking the right questions. This guide paid for itself 30 times over."</p>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Sarah M.</p>
+                                    <p class="text-sm text-gray-500">First-time car owner</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2" style="border-color: #9C6B7D">
+                                <div class="flex gap-1 mb-4" style="color: #9C6B7D">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"Finally, someone explains cars without making me feel stupid. Aunt Mae is like having a trusted friend in your pocket."</p>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Jennifer K.</p>
+                                    <p class="text-sm text-gray-500">Busy mom of three</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-3xl p-8 border-2" style="border-color: #9C6B7D">
+                                <div class="flex gap-1 mb-4" style="color: #9C6B7D">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                </div>
+                                <p class="text-gray-700 italic mb-4">"I used the negotiation scripts when buying my used car and got $1,200 off the asking price. Best $12 I ever spent."</p>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Amanda R.</p>
+                                    <p class="text-sm text-gray-500">Recent college grad</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Buy Section -->
+                <section id="buy" class="py-16 md:py-20">
+                    <div class="max-w-7xl mx-auto px-4">
+                        <div class="rounded-3xl p-8 md:p-12" style="background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%)">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div class="text-white">
+                                    <p class="text-sm font-semibold tracking-wider uppercase mb-2 text-white/80">Limited Time Offer</p>
+                                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Aunt Mae's Complete Car Care Guide</h2>
+                                    <p class="text-white/90 mb-6">Everything you need to take control of your car care journey.</p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            39-page comprehensive guide
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            20 practical chapters
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            Negotiation scripts & checklists
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            Instant PDF download
+                                        </li>
+                                        <li class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            Lifetime updates included
+                                        </li>
+                                    </ul>
+                                    <div class="flex items-baseline gap-4 mb-6">
+                                        <span class="text-5xl font-bold">$12</span>
+                                        <span class="text-2xl text-white/60 line-through">$29</span>
+                                    </div>
+                                    <a href="#" class="inline-block transition-transform hover:scale-105">
+                                        <div class="flex h-14 px-8 bg-black text-white rounded-xl items-center justify-center font-semibold text-lg shadow-lg">
+                                            Buy Now - Instant Download
+                                        </div>
+                                    </a>
+                                    <div class="flex items-start gap-3 mt-6 p-4 rounded-xl" style="background: rgba(255,255,255,0.15)">
+                                        <svg class="w-6 h-6 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                        <div>
+                                            <p class="font-semibold">30-Day Money-Back Guarantee</p>
+                                            <p class="text-sm text-white/80">Not satisfied? Get a full refund, no questions asked.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-center">
+                                    <div class="bg-white rounded-2xl p-4 shadow-2xl" style="max-width: 260px;">
+                                        <img src="images/cover.png" alt="Aunt Mae's Complete Car Care Guide" class="w-full h-auto rounded-lg"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section class="py-16 md:py-20" style="background-color: rgba(156, 107, 125, 0.05)">
+                    <div class="max-w-3xl mx-auto px-4">
+                        <div class="text-center mb-12">
+                            <p class="text-sm font-semibold tracking-wider uppercase mb-2" style="color: #9C6B7D">Questions?</p>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                                Frequently Asked <span class="gradient-text">Questions</span>
+                            </h2>
+                        </div>
+                        <div class="space-y-4" id="faqList">
+                            <div class="faq-item bg-white rounded-2xl border-2" style="border-color: #9C6B7D">
+                                <button class="faq-question w-full flex justify-between items-center p-6 text-left text-gray-900 font-semibold" onclick="toggleFaq(this)">
+                                    <span>Who is this guide for?</span>
+                                    <svg class="faq-chevron w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="faq-answer px-6">
+                                    <p class="text-gray-600 pb-6">This guide is for anyone who wants to understand their car without becoming a mechanic. Whether you're a first-time car owner, a busy parent, or someone who's tired of feeling confused at the repair shop, Aunt Mae has you covered.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-2xl border-2" style="border-color: #9C6B7D">
+                                <button class="faq-question w-full flex justify-between items-center p-6 text-left text-gray-900 font-semibold" onclick="toggleFaq(this)">
+                                    <span>Do I need any car knowledge to use this?</span>
+                                    <svg class="faq-chevron w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="faq-answer px-6">
+                                    <p class="text-gray-600 pb-6">Not at all! The guide is written for complete beginners. Aunt Mae explains everything in plain English, starting from the absolute basics. No prior car knowledge required.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-2xl border-2" style="border-color: #9C6B7D">
+                                <button class="faq-question w-full flex justify-between items-center p-6 text-left text-gray-900 font-semibold" onclick="toggleFaq(this)">
+                                    <span>How do I access the guide after purchase?</span>
+                                    <svg class="faq-chevron w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="faq-answer px-6">
+                                    <p class="text-gray-600 pb-6">Immediately after purchase, you'll receive an email with a download link. The guide is a PDF that works on any device - phone, tablet, or computer. You can also print it out if you prefer.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-2xl border-2" style="border-color: #9C6B7D">
+                                <button class="faq-question w-full flex justify-between items-center p-6 text-left text-gray-900 font-semibold" onclick="toggleFaq(this)">
+                                    <span>What if the guide doesn't help me?</span>
+                                    <svg class="faq-chevron w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="faq-answer px-6">
+                                    <p class="text-gray-600 pb-6">We offer a 30-day money-back guarantee. If you're not completely satisfied, just email us and we'll refund your purchase - no questions asked, no hard feelings.</p>
+                                </div>
+                            </div>
+                            <div class="faq-item bg-white rounded-2xl border-2" style="border-color: #9C6B7D">
+                                <button class="faq-question w-full flex justify-between items-center p-6 text-left text-gray-900 font-semibold" onclick="toggleFaq(this)">
+                                    <span>Is this connected to the Clutch app?</span>
+                                    <svg class="faq-chevron w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </button>
+                                <div class="faq-answer px-6">
+                                    <p class="text-gray-600 pb-6">Yes! Aunt Mae's Guide is from the team behind Clutch, the AI-powered car care app. The guide complements the app perfectly - use the app for real-time help and the guide for deeper learning.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    function toggleFaq(button) {
+                        const item = button.closest('.faq-item');
+                        const allItems = document.querySelectorAll('.faq-item');
+
+                        allItems.forEach(i => {
+                            if (i !== item) i.classList.remove('open');
+                        });
+
+                        item.classList.toggle('open');
+                    }
+                </script>
+
+                <!-- Final CTA -->
+                <section class="py-16 md:py-20">
+                    <div class="max-w-4xl mx-auto px-4 text-center">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                            Ready to take control of your <span class="gradient-text">car care?</span>
+                        </h2>
+                        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Join thousands of confident car owners who stopped overpaying and started understanding their vehicles.</p>
+                        <a href="#buy" class="inline-block transition-transform hover:scale-105">
+                            <div class="flex h-14 px-8 text-white rounded-xl items-center justify-center font-semibold text-lg" style="background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%); box-shadow: 0 8px 30px rgba(156, 107, 125, 0.4)">
+                                Get the Guide - $12
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t" style="border-color: #9C6B7D">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="col-span-1 md:col-span-2">
+                        <div class="flex items-center">
+                            <img alt="Clutch logo" width="40" height="40" class="h-10 w-10 rounded-xl border border-gray-200" src="../icon.png"/>
+                            <span class="ml-3 text-xl font-bold text-black">Clutch</span>
+                        </div>
+                        <p class="mt-4 text-gray-600 max-w-md">Your AI-powered automotive assistant.<br>Empowering car owners with knowledge and confidence.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold tracking-wider uppercase" style="color: #9C6B7D">Legal</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a class="footer-link" href="../terms/">Terms of Service</a></li>
+                            <li><a class="footer-link" href="../privacy/">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold tracking-wider uppercase" style="color: #9C6B7D">Support</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a class="footer-link" href="../support/">Help Center</a></li>
+                            <li><a href="mailto:alecwisdom@gmail.com" class="footer-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t border-gray-200 pt-8">
+                    <p class="text-center text-gray-400 text-sm">&copy; 2026 Clutch. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

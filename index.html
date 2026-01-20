@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Clutch - Your AI-Powered Automotive Assistant</title>
+    <meta name="description" content="Stop getting ripped off at the mechanic. Clutch helps you understand car problems, analyze repair quotes, estimate damage costs, and find trusted mechanics nearby."/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+    <link rel="canonical" href="https://clutchcarcareapp.com/"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-link {
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #9C6B7D;
+        }
+        .footer-link {
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: #9C6B7D;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid #9C6B7D;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            font-weight: 500;
+            border-radius: 0.5rem;
+        }
+        .mobile-menu a:hover {
+            background-color: #F8F4F5;
+            color: #9C6B7D;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #374151;
+            transition: all 0.3s;
+        }
+        @media (max-width: 767px) {
+            .hamburger {
+                display: flex;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        /* Screenshot Carousel Styles */
+        .screenshot-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .screenshot-stack {
+            position: relative;
+            width: 280px;
+            height: 560px;
+        }
+        .screenshot-slide {
+            position: absolute;
+            width: 280px;
+            left: 0;
+            top: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .screenshot-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .screenshot-slide.active {
+            z-index: 3;
+            opacity: 1;
+        }
+        .screenshot-slide.next,
+        .screenshot-slide.prev,
+        .screenshot-slide.hidden {
+            z-index: 1;
+            opacity: 0;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 2px solid #9C6B7D;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 10;
+            color: #9C6B7D;
+        }
+        .carousel-arrow:hover {
+            background: #9C6B7D;
+            color: white;
+        }
+        .carousel-arrow.prev { left: -70px; }
+        .carousel-arrow.next { right: -70px; }
+        .carousel-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+        }
+        .carousel-dot.active {
+            background: #9C6B7D;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .feature-label {
+            text-align: center;
+            font-weight: 600;
+            color: #374151;
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 767px) {
+            .carousel-arrow { display: none; }
+            .screenshot-stack { width: 220px; height: 440px; }
+            .screenshot-slide { width: 220px; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="min-h-screen flex flex-col" style="background-color: #F8F4F5">
+        <!-- Header -->
+        <header class="bg-white shadow-sm border-b relative" style="border-color: #9C6B7D">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-6">
+                    <a class="flex items-center" href="index.html">
+                        <img alt="Clutch logo" width="40" height="40" class="h-10 w-10 rounded-xl border border-gray-200" src="icon.png"/>
+                        <span class="ml-3 text-2xl font-bold text-black">Clutch</span>
+                    </a>
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="guide/" class="nav-link">Guide</a>
+                        <a href="https://apps.apple.com/app/clutch" target="_blank" rel="noopener noreferrer" class="nav-link">Download</a>
+                        <a class="nav-link" href="support/">Support</a>
+                    </nav>
+                    <div class="hamburger md:hidden" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="mobile-menu" id="mobileMenu">
+                    <a href="guide/">Guide</a>
+                    <a href="https://apps.apple.com/app/clutch" target="_blank" rel="noopener noreferrer">Download</a>
+                    <a href="privacy/">Privacy</a>
+                    <a href="terms/">Terms</a>
+                    <a href="support/">Support</a>
+                </div>
+            </div>
+        </header>
+        <script>
+            function toggleMenu() {
+                document.getElementById('mobileMenu').classList.toggle('active');
+            }
+        </script>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <div style="background: linear-gradient(to bottom, #F8F4F5 0%, #ffffff 100%)">
+                <!-- Hero Section -->
+                <section class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 py-12 md:py-20">
+                    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between">
+                        <div class="text-center md:text-left md:w-1/2 lg:w-3/5">
+                            <img alt="Clutch logo" width="120" height="120" class="mb-8 rounded-3xl shadow mx-auto md:mx-0" style="border: 2px solid #9C6B7D; width: 120px; height: 120px;" src="icon.png"/>
+                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-gray-900">
+                                Stop getting<br><span class="gradient-text">ripped off.</span>
+                            </h1>
+                            <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                                Your AI-powered automotive assistant.<br class="hidden md:block">
+                                Analyze quotes. Estimate damage. Find mechanics.<br class="hidden md:block">
+                                No jargon. Just answers.
+                            </p>
+                            <div class="flex flex-col items-center md:items-start gap-4 mb-8">
+                                <a href="https://apps.apple.com/app/clutch" target="_blank" rel="noopener noreferrer" class="transition-transform hover:scale-105">
+                                    <div class="flex w-56 h-16 bg-black text-white rounded-xl items-center justify-center">
+                                        <div class="mr-3">
+                                            <svg viewBox="0 0 384 512" width="35" height="45">
+                                                <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs">Download on the</div>
+                                            <div class="text-2xl font-semibold font-sans -mt-1">App Store</div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="flex items-center gap-2 px-4 py-2 rounded-full border-2 w-fit" style="border-color: #9C6B7D; background-color: #F8F4F5">
+                                    <svg class="w-5 h-5" style="color: #9C6B7D" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-sm font-semibold" style="color: #9C6B7D">No mechanic jargon. Just answers.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- App Screenshots Carousel -->
+                        <div class="flex flex-col items-center md:w-1/2 lg:w-2/5 flex-shrink-0">
+                            <div class="screenshot-carousel">
+                                <button class="carousel-arrow prev" onclick="prevSlide()">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M15 18l-6-6 6-6"/>
+                                    </svg>
+                                </button>
+
+                                <div class="screenshot-stack" id="screenshotStack">
+                                    <div class="screenshot-slide active" data-index="0">
+                                        <img src="screenshot-1.png" alt="Ask Anything Instantly"/>
+                                    </div>
+                                    <div class="screenshot-slide next" data-index="1">
+                                        <img src="screenshot-2.png" alt="Estimate Repairs Instantly"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="2">
+                                        <img src="screenshot-3.png" alt="Spot Overcharges Fast"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="3">
+                                        <img src="screenshot-4.png" alt="Backup When You Need It Most"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="4">
+                                        <img src="screenshot-5.png" alt="Speak Up With Confidence"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="5">
+                                        <img src="screenshot-6.png" alt="Never Be Alone"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="6">
+                                        <img src="screenshot-7.png" alt="Decode Any Warning Light"/>
+                                    </div>
+                                    <div class="screenshot-slide hidden" data-index="7">
+                                        <img src="screenshot-8.png" alt="Look Up OBD-II Codes"/>
+                                    </div>
+                                </div>
+
+                                <button class="carousel-arrow next" onclick="nextSlide()">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 18l6-6-6-6"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="carousel-dots" id="carouselDots">
+                                <div class="carousel-dot active" data-index="0"></div>
+                                <div class="carousel-dot" data-index="1"></div>
+                                <div class="carousel-dot" data-index="2"></div>
+                                <div class="carousel-dot" data-index="3"></div>
+                                <div class="carousel-dot" data-index="4"></div>
+                                <div class="carousel-dot" data-index="5"></div>
+                                <div class="carousel-dot" data-index="6"></div>
+                                <div class="carousel-dot" data-index="7"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <script>
+                    let currentSlide = 0;
+                    const totalSlides = 8;
+
+                    function updateCarousel() {
+                        const slides = document.querySelectorAll('.screenshot-slide');
+                        const dots = document.querySelectorAll('.carousel-dot');
+
+                        slides.forEach((slide, i) => {
+                            slide.classList.remove('active', 'next', 'prev', 'hidden');
+                            if (i === currentSlide) {
+                                slide.classList.add('active');
+                            } else if (i === (currentSlide + 1) % totalSlides) {
+                                slide.classList.add('next');
+                            } else if (i === (currentSlide - 1 + totalSlides) % totalSlides) {
+                                slide.classList.add('prev');
+                            } else {
+                                slide.classList.add('hidden');
+                            }
+                        });
+
+                        dots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === currentSlide);
+                        });
+                    }
+
+                    function nextSlide() {
+                        currentSlide = (currentSlide + 1) % totalSlides;
+                        updateCarousel();
+                    }
+
+                    function prevSlide() {
+                        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                        updateCarousel();
+                    }
+
+                    function goToSlide(index) {
+                        currentSlide = index;
+                        updateCarousel();
+                    }
+
+                    document.querySelectorAll('.carousel-dot').forEach(dot => {
+                        dot.addEventListener('click', () => {
+                            goToSlide(parseInt(dot.dataset.index));
+                        });
+                    });
+
+                    // Auto-advance every 4 seconds
+                    setInterval(nextSlide, 4000);
+
+                    // Touch/swipe support for mobile
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+                    const screenshotStack = document.getElementById('screenshotStack');
+
+                    screenshotStack.addEventListener('touchstart', e => {
+                        touchStartX = e.changedTouches[0].screenX;
+                    }, false);
+
+                    screenshotStack.addEventListener('touchend', e => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        if (touchStartX - touchEndX > 50) nextSlide();
+                        if (touchEndX - touchStartX > 50) prevSlide();
+                    }, false);
+                </script>
+
+                <!-- Features Section -->
+                <section id="features" class="max-w-7xl mx-auto px-4 py-20">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                            Everything you need to <span class="gradient-text">stay informed</span>
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Feature 1: AI Chat -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #9C6B7D">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">AI Chat Assistant</h3>
+                            <p class="text-gray-600 text-sm">Ask any car question in plain English. Get instant, jargon-free answers powered by AI.</p>
+                        </div>
+
+                        <!-- Feature 2: Quote Analyzer -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #9C6B7D">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Quote Analyzer</h3>
+                            <p class="text-gray-600 text-sm">Snap a photo of any repair quote. AI analyzes each line item and compares to fair market rates.</p>
+                        </div>
+
+                        <!-- Feature 3: Damage Estimator -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #9C6B7D">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Damage Estimator</h3>
+                            <p class="text-gray-600 text-sm">Upload photos of car damage. Get instant repair cost estimates before visiting a shop.</p>
+                        </div>
+
+                        <!-- Feature 4: Service Locator -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #9C6B7D">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #9C6B7D">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Service Locator</h3>
+                            <p class="text-gray-600 text-sm">Find trusted mechanics, tire shops, and auto services near you with ratings and reviews.</p>
+                        </div>
+
+                        <!-- Feature 5: Service History -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #B8899A">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Service History</h3>
+                            <p class="text-gray-600 text-sm">Keep a complete digital record of all maintenance, repairs, and services for your vehicle.</p>
+                        </div>
+
+                        <!-- Feature 6: Smart Reminders -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #B8899A">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Smart Reminders</h3>
+                            <p class="text-gray-600 text-sm">Never miss an oil change or scheduled service with intelligent maintenance reminders.</p>
+                        </div>
+
+                        <!-- Feature 7: Privacy First -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #B8899A">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Privacy First</h3>
+                            <p class="text-gray-600 text-sm">Your data stays on your device. We don't sell your information or track your location.</p>
+                        </div>
+
+                        <!-- Feature 8: No Jargon -->
+                        <div class="relative bg-white rounded-3xl p-8 border-2 transition-all overflow-hidden group hover:shadow-xl" style="border-color: #B8899A">
+                            <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background-color: #B8899A">
+                                <svg width="28" height="28" fill="none" stroke="white" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">No Jargon</h3>
+                            <p class="text-gray-600 text-sm">Everything explained in plain English. Understand what's wrong and what you're paying for.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CTA Section -->
+                <section class="max-w-7xl mx-auto px-4 py-20">
+                    <div class="rounded-3xl p-12 md:p-16 text-center" style="background: linear-gradient(135deg, #9C6B7D 0%, #B8899A 100%)">
+                        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">Ready to take control?</h2>
+                        <p class="text-xl text-white/95 mb-8 max-w-2xl mx-auto text-balance">Join car owners who are saving money and making smarter repair decisions.</p>
+                        <a href="https://apps.apple.com/app/clutch" target="_blank" rel="noopener noreferrer" class="inline-block transition-transform hover:scale-105">
+                            <div class="flex w-56 h-16 bg-black text-white rounded-xl items-center justify-center shadow-lg mx-auto">
+                                <div class="mr-3">
+                                    <svg viewBox="0 0 384 512" width="32" height="42">
+                                        <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="text-xs">Download on the</div>
+                                    <div class="text-2xl font-semibold font-sans -mt-1">App Store</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t" style="border-color: #9C6B7D">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="col-span-1 md:col-span-2">
+                        <div class="flex items-center">
+                            <img alt="Clutch logo" width="40" height="40" class="h-10 w-10 rounded-xl border border-gray-200" src="icon.png"/>
+                            <span class="ml-3 text-xl font-bold text-black">Clutch</span>
+                        </div>
+                        <p class="mt-4 text-gray-600 max-w-md">Your AI-powered automotive assistant.<br>Stop getting ripped off at the mechanic.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold tracking-wider uppercase" style="color: #9C6B7D">Legal</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a class="footer-link" href="terms/">Terms of Service</a></li>
+                            <li><a class="footer-link" href="privacy/">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-semibold tracking-wider uppercase" style="color: #9C6B7D">Support</h3>
+                        <ul class="mt-4 space-y-4">
+                            <li><a class="footer-link" href="support/">Help Center</a></li>
+                            <li><a href="mailto:alecwisdom@gmail.com" class="footer-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-8 border-t border-gray-200 pt-8">
+                    <p class="text-center text-gray-400 text-sm">&copy; 2026 Monos Pros Monon. All Rights Reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
