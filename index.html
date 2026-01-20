@@ -136,25 +136,6 @@
         }
         .carousel-arrow.prev { left: -70px; }
         .carousel-arrow.next { right: -70px; }
-        .carousel-dots {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-top: 24px;
-        }
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #d1d5db;
-            cursor: pointer;
-            transition: all 0.4s ease-in-out;
-        }
-        .carousel-dot.active {
-            background: #9C6B7D;
-            width: 24px;
-            border-radius: 4px;
-        }
         .feature-label {
             text-align: center;
             font-weight: 600;
@@ -287,16 +268,6 @@
                                 </button>
                             </div>
 
-                            <div class="carousel-dots" id="carouselDots">
-                                <div class="carousel-dot active" data-index="0"></div>
-                                <div class="carousel-dot" data-index="1"></div>
-                                <div class="carousel-dot" data-index="2"></div>
-                                <div class="carousel-dot" data-index="3"></div>
-                                <div class="carousel-dot" data-index="4"></div>
-                                <div class="carousel-dot" data-index="5"></div>
-                                <div class="carousel-dot" data-index="6"></div>
-                                <div class="carousel-dot" data-index="7"></div>
-                            </div>
                         </div>
                     </div>
                 </section>
@@ -307,8 +278,6 @@
 
                     function updateCarousel() {
                         const slides = document.querySelectorAll('.screenshot-slide');
-                        const dots = document.querySelectorAll('.carousel-dot');
-
                         slides.forEach((slide, i) => {
                             slide.classList.remove('active', 'next', 'prev', 'hidden');
                             if (i === currentSlide) {
@@ -320,10 +289,6 @@
                             } else {
                                 slide.classList.add('hidden');
                             }
-                        });
-
-                        dots.forEach((dot, i) => {
-                            dot.classList.toggle('active', i === currentSlide);
                         });
                     }
 
@@ -341,12 +306,6 @@
                         currentSlide = index;
                         updateCarousel();
                     }
-
-                    document.querySelectorAll('.carousel-dot').forEach(dot => {
-                        dot.addEventListener('click', () => {
-                            goToSlide(parseInt(dot.dataset.index));
-                        });
-                    });
 
                     // Auto-advance every 4 seconds
                     setInterval(nextSlide, 4000);
